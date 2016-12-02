@@ -2,14 +2,17 @@
 buildscript {
     repositories {
         jcenter()
+        mavenLocal()
     }
 
     dependencies {
         classpath 'com.android.tools.build:gradle:2.2.2'
+        classpath "jp.leafytree.gradle:gradle-android-scala-plugin:2.2.1-SNAPSHOT"
     }
 }
 
 apply plugin: 'com.android.application'
+apply plugin: "jp.leafytree.android-scala"
 
 repositories {
     jcenter()
@@ -17,9 +20,10 @@ repositories {
 
 dependencies {
     compile "com.android.support:support-v4:24.1.1"
-    compile "com.android.support:support-v13:24.1.1"
+    compile "com.android.support:gridlayout-v7:24.1.1"
     compile "com.android.support:cardview-v7:24.1.1"
     compile "com.android.support:appcompat-v7:24.1.1"
+    compile "org.scala-lang:scala-library:2.11.7"
 }
 
 // The sample build uses multiple directories to
@@ -35,7 +39,7 @@ android {
     buildToolsVersion "24.0.1"
 
     defaultConfig {
-        minSdkVersion 18
+        minSdkVersion 8
         targetSdkVersion 24
     }
 
@@ -48,6 +52,7 @@ android {
         main {
             dirs.each { dir ->
                 java.srcDirs "src/${dir}/java"
+                scala.srcDirs "src/${dir}/scala"
                 res.srcDirs "src/${dir}/res"
             }
         }
